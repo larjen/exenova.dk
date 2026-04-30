@@ -22,10 +22,13 @@ A mobile-first, ultra-lightweight portfolio and blog website built with Astro.
 │   │   └── site.ts
 │   ├── layouts/
 │   ├── pages/
-│   │   ├── notes/
-│   │   ├── 404.astro
-│   │   ├── search.astro
-│   │   └── index.astro
+│   │   ├── search/
+│   │   └── [slug].astro
+│   ├── tags/
+│   │   ├── index.astro
+│   │   └── [tag]/
+│   │       └── [...page].astro
+│   ├── 404.astro
 │   ├── scripts/
 │   │   └── searchClient.ts
 │   └── utils/
@@ -119,7 +122,7 @@ To maintain a highly legible codebase suitable for AI agent orchestration, compl
 - **Strict 75-Line Threshold:** If the HTML template of _any_ component or page exceeds 75 lines, it is a strict architectural violation. Extract logical blocks into discrete sub-components.
 - **Pagefind Indexing Boundaries:** Pagefind MUST NOT index the global `<body>`. All indexable content pages (like `[slug].astro`) MUST wrap their core readable content in a dedicated wrapper element with the `data-pagefind-body` attribute and `class="contents"` to act as a phantom flow anchor. Additionally, all raw SVG/Icon primitives must include `data-pagefind-ignore="all"` on their root `<svg>` tag to prevent SVG path data (e.g., 'aaaaaa') from polluting the search index. Never let UI chrome or icon markup leak into the search corpus.
 - **Data Fetching:** All Astro Collection queries, filtering, and sorting must be abstracted into `src/utils/content.ts`. All derivative queries (e.g., fetching by tag, related posts) MUST cascade from `getSortedNotes()` to ensure chronological consistency across the application. Never bypass the sorting layer.
-- **Global Data:** Hardcoding global data (names, emails, SEO titles, external service URLs) in UI components is forbidden. Use `src/config/site.ts`. External third-party service URLs (e.g., Koalendar booking) must be managed in `src/config/site.ts` to ensure consistency across the orchestrator components.
+- **Global Data:** Hardcoding global data (names, emails, SEO titles, external service URLs) in UI components is forbidden. Use `site.config.json` as the single source of truth. External third-party service URLs (e.g., Koalendar booking) must be managed in `site.config.json` to ensure consistency across the orchestrator components.
 - **Heavy Client Logic:** Complex client-side JavaScript (e.g., search indexing, API calls) must be isolated in `src/scripts/` and imported into the `.astro` file. Trivial UI interactions (e.g., mobile menu toggles) may remain in scoped `<script>` tags within the component.
 - **Client-Side Rendering:** Never use HTML string literals inside `src/scripts/`. Always use hidden HTML `<template>` tags in the `.astro` file and clone them via DOM manipulation in the script.
 - **Page Componentization:** Page files (e.g., `index.astro`, `search.astro`) must act strictly as orchestrators. If an Astro component's HTML template exceeds 75 lines, extract logical sections into sub-components. Massive blocks of HTML should not live directly in the page file. Extract major structural blocks into dedicated UI components (e.g., `<HeroSection>`, `<SearchInterface>`) to maintain readability and DRY principles. The `404.astro` page is explicitly mapped for GitHub Pages static error routing — Astro automatically outputs this as `404.html` at build time, which GitHub Pages serves for missing routes.
@@ -129,9 +132,10 @@ To maintain a highly legible codebase suitable for AI agent orchestration, compl
   - **Layouts:** Page-level scaffolding (BaseLayout). Must not contain monolithic HTML `<head>` blocks; extract SEO meta tags into dedicated `SeoHead` component.
 - **Layout Orchestration:** All layout scaffolding (Header, Footer) is centrally orchestrated in `BaseLayout.astro`. Pages must NOT import or render Header/Footer directly; instead, they pass `currentPath` and `flushFooter` props to `BaseLayout`.
 - **Article Content:** All markdown content rendered via Astro Content Collections MUST be wrapped in the `<Article />` component. This component enforces the `font-text` family and `prose` constraints. Never render raw markdown content without this wrapper.
-- **Paginated Routes:** The Notes hub uses a dynamic paginated route at `src/pages/notes/[...page].astro`. All pagination configuration (page size) is centralized in `PAGE_CONFIG` within `src/config/ui.ts`.
+- **Paginated Routes:** The Tags hub uses a dynamic paginated route at `src/pages/tags/[tag]/[...page].astro`. All pagination configuration (page size) is centralized in `PAGE_CONFIG` within `src/config/ui.ts`.
 - **Server-Side UI Logic:** Whenever possible, calculate UI states (like dynamic breadcrumb paths or navigation active states) at build-time within the Astro frontmatter (`---`). Do not rely on client-side JavaScript for logic that can be statically generated.
 - **Styles:** Handled entirely via Tailwind CSS utility classes. `<style>` tags are forbidden unless absolutely required for dynamic logic that Tailwind cannot handle. Global layout patterns MUST be defined as `@utility` classes in `src/styles/global.css`. Local component variants MUST use a static `variants` mapping object (e.g., `const variants = { standard: '...', hero: '...' }`) to ensure the Tailwind scanner detects all class references.
+- **AST Markdown Pipeline:** Standard markdown parsing is intercepted in astro.config.mjs. Obsidian [[Wikilinks]] are parsed by remark-wiki-link and dynamically routed to the /search/ subpath. External links automatically receive target="_blank" via rehype-external-links.
 
 ### JSDoc Documentation
 

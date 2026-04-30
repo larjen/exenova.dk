@@ -50,21 +50,21 @@ This single source of truth controls site metadata, application toggles, deploym
 
 By default, the platform looks for markdown notes in the local `./ObsidianVault` directory. If you want to keep your repository clean and point the compiler directly to an external, private Obsidian vault on your computer:
 
-1. Open `package.json`.
-2. Locate `"vaultPath"` in the `"config"` object.
+1. Open `site.config.json`.
+2. Locate the `"vaultPath"` property.
 3. Update the value to the relative or absolute path of your actual Obsidian vault (e.g., `"../MyPrivateVault"`).
 
-Astro will dynamically read and compile notes directly from your external vault. Make sure your notes follow the frontmatter rules in [_New-Note.md](./ObsidianVault/_New-Note.md).
+Astro will dynamically read and compile notes directly from your external vault. Make sure your notes follow the frontmatter rules in [_New-Note.md](./ObsidianVault/_template/_New-Note.md).
 
 ### Split-Repository Deployment (Private Source ➔ Public Hosting)
 
-This platform uses a secure deployment architecture. You can keep your Astro source code, configuration, and raw Obsidian notes in a **private** repository, while publishing only the compiled, static HTML/CSS to a **public** GitHub repository for hosting.
+This platform uses a secure deployment architecture. You can keep your Astro source code, configuration, and raw Obsidian notes in a **private** repository, while publishing only the compiled, static HTML/CSS to a **public** repository for hosting.
 
 To configure this:
 
-1. Open `package.json`.
-2. In the `"config"` object, update `"deployRepo"` to the `.git` URL of your public hosting repository (e.g., `"https://example.com/example-repo.git"`).
-3. In GitHub settings enable GitHub Pages, and choose deploy from a branch. 
+1. Open `site.config.json`.
+2. Update the `deployRepo` property to the `.git` URL of your public hosting repository (e.g., `"https://example.com/example-repo.git"`).
+3. In the repository settings enable GitHub Pages, and choose deploy from a branch. 
 4. Update `"deployBranch"` to the target branch (usually `"main"` or `"master"`).
 
 When you are ready to publish, run:
@@ -96,7 +96,7 @@ This project is governed by aggressive architectural constraints to maintain a c
 Before making changes or orchestrating AI agents to write code, please review the core directives:
 
 - [**Architecture Policy (`ARCHITECTURE.md`)**](./ARCHITECTURE.md) - Rules on SoC, pure-REM units, component taxonomy, and data fetching.
-- [**Content Guidelines (`CONTENT_GUIDELINES.md`)**](./CONTENT_GUIDELINES.md) - Directives for authoring, structuring, and tagging markdown notes within Obsidian.
+- [**Obsidian Guidelines:**](https://help.obsidian.md/YAML+frontmatter) Ensure your notes contain valid YAML frontmatter. Do not use an H1 (`#`) in the body of your note, as the Astro layout handles the title automatically. Start content with an H2 (`##`).
 
 > **Note for AI Agents:** Agents must strictly adhere to the `.cursorrules` and ARCHITECTURE.md files located in the root directory.
 
