@@ -1,0 +1,34 @@
+---
+/**
+ * @file RelatedNotes.astro
+ * @description Renders the footer section listing related note articles.
+ * Encapsulates the related content pattern for note detail pages.
+ * @property {CollectionEntry<'notes'>[]} notes - Array of related note entries.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { LAYOUT } from '../config/ui';
+import Kicker from './Kicker.astro';
+import ArticleCard from './ArticleCard.astro';
+
+interface Props {
+  notes: CollectionEntry<'notes'>[];
+}
+
+const { notes } = Astro.props;
+---
+
+{
+  notes.length > 0 && (
+    <footer
+      class={`${LAYOUT.containerText} rhythm-section border-system-border border-t-[0.5px]`}
+      data-pagefind-ignore="all"
+    >
+      <Kicker>Related Notes</Kicker>
+      <div class="rhythm-stack">
+        {notes.map((post) => (
+          <ArticleCard post={post} />
+        ))}
+      </div>
+    </footer>
+  )
+}

@@ -1,0 +1,37 @@
+---
+/**
+ * @file ArticleCard.astro
+ * @description Reusable card component for displaying note entries in list views.
+ * Strictly typed to CollectionEntry<'notes'> to enforce content collection binding.
+ * Visual styling is centralized in global.css via the card-article utility to share with client-side templates.
+ * @property {CollectionEntry<'notes'>} post - The content collection entry.
+ * @property {boolean} [compact=false] - When true, renders a smaller variant without the date line.
+ */
+import type { CollectionEntry } from 'astro:content';
+import ArticleMeta from './ArticleMeta.astro';
+
+interface Props {
+  post: CollectionEntry<'notes'>;
+  compact?: boolean;
+}
+
+const { post, compact = false } = Astro.props;
+const { id } = post;
+const { title, date, description, tags } = post.data;
+---
+
+<article class="group card-article first:border-t-0">
+  {/* Text Group: Tighter 0.5rem gap (gap-2) between title and description */}
+  <div class="flex flex-col gap-2">
+    <h2 class="type-h3 text-theme-text">
+      <a href={`/search/${id}`} class="after:absolute after:inset-0 focus:outline-none">
+        {title}
+      </a>
+    </h2>
+    <p class="type-body text-theme-text">
+      {description}
+    </p>
+  </div>
+
+  <ArticleMeta date={date} tags={tags} compact={compact} />
+</article>

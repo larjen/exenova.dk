@@ -1,0 +1,17 @@
+---
+/**
+ * @file style-guide.astro
+ * @description Hidden route serving as a visual repository for all typography and UI components.
+ * Not linked from the main navigation.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StyleGuideViewer from '../components/StyleGuideViewer.astro';
+---
+
+<BaseLayout
+  title="Style Guide | Internal"
+  description="Internal typography and UI component test page."
+  currentPath="/style-guide"
+>
+  <StyleGuideViewer />
+</BaseLayout>

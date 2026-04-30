@@ -1,0 +1,33 @@
+---
+/**
+ * @file Footer.astro
+ * @description Editorial footer with clean, minimalist typography.
+ * Visual styling is resolved via theme CSS cascade.
+ * @property {boolean} [flush=false] - If true, removes the top margin.
+ */
+import { SITE_CONFIG } from '../config/site';
+import SocialLink from './SocialLink.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  flush?: boolean;
+}
+
+const { flush = false } = Astro.props;
+---
+
+<footer
+  class={`container-breadcrumbs px-6 bg-transparent ${flush ? 'py-0' : 'py-12'}`}
+  data-pagefind-ignore="all"
+>
+  <div class="container-text rhythm-stack items-center justify-center">
+    <nav aria-label="Social links" class="flex gap-10">
+      <SocialLink href={SITE_CONFIG.githubUrl} label="GitHub">
+        <Icon name="github" />
+      </SocialLink>
+      <SocialLink href={SITE_CONFIG.linkedinUrl} label="LinkedIn">
+        <Icon name="linkedin" />
+      </SocialLink>
+    </nav>
+  </div>
+</footer>

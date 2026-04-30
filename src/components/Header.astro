@@ -1,0 +1,48 @@
+---
+/**
+ * @file Header.astro
+ * @description Editorial masthead navigation. Features a sticky header with logo and conditional search.
+ * Visual styling uses theme tokens for text and borders.
+ * @property {string} [currentPath='/'] - The current active route.
+ */
+import LogoLink from './LogoLink.astro';
+import Icon from './Icon.astro';
+import NavbarSearchInput from './NavbarSearchInput.astro';
+import { SITE_CONFIG } from '../config/site';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+---
+
+{
+  !SITE_CONFIG.hideNavigation && (
+    <header
+      id="masthead"
+      class="full-w bg-theme-bg/40 sticky top-0 z-50 px-6 py-4 shadow-md backdrop-blur-sm md:py-6"
+      data-pagefind-ignore="all"
+    >
+      <div class="container-text flex items-center justify-between">
+        <LogoLink />
+
+        {SITE_CONFIG.includeNotes && (
+          <nav aria-label="Primary Navigation" class="flex items-center">
+            {currentPath === '/search' ? (
+              <NavbarSearchInput />
+            ) : (
+              <a
+                href="/search"
+                class="text-theme-text hover:text-theme-muted -mr-2 p-2 transition-colors focus:outline-none"
+                aria-label="Search notes"
+              >
+                <Icon name="search" class="h-4 w-4" />
+              </a>
+            )}
+          </nav>
+        )}
+      </div>
+    </header>
+  )
+}

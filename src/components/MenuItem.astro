@@ -1,0 +1,29 @@
+---
+/**
+ * @file MenuItem.astro
+ * @description Renders a navigation link with active-state styling.
+ * Encapsulates the logic for determining whether a link is currently active
+ * based on the current path, enabling visual differentiation in the nav.
+ * Visual styling is resolved via theme CSS cascade.
+ * @property {string} href - The URL the link points to.
+ * @property {string} currentPath - The currently active route path.
+ * @property {string} label - The display text for the link.
+ */
+interface Props {
+  href: string;
+  currentPath: string;
+  label: string;
+}
+
+const { href, currentPath, label } = Astro.props;
+
+const base = `type-ui w-fit border-b pb-1 transition-colors`;
+const isActive = currentPath === href;
+const classes = isActive
+  ? `${base} text-theme-text border-system-brand`
+  : `${base} text-theme-muted border-transparent hover:text-theme-text`;
+---
+
+<a href={href} class={classes}>
+  {label}
+</a>

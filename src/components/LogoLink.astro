@@ -1,0 +1,35 @@
+---
+/**
+ * @file LogoLink.astro
+ * @description Renders the site logo wrapped in a link to the homepage.
+ * Uses the full SVG logo and includes a screen-reader label for accessibility.
+ * Visual styling is resolved via theme CSS cascade.
+ * @property {string} [class] - Optional Tailwind classes for the container.
+ */
+import Icon from './Icon.astro';
+import { SITE_CONFIG } from '../config/site';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<a
+  href="/"
+  class={`flex items-center z-10 relative text-theme-text group ${className}`}
+  aria-label={`${SITE_CONFIG.authorName} Homepage`}
+>
+  <Icon
+    name="exenova-logo"
+    class="[display:var(--theme-logo-base)] h-10 w-auto md:h-12"
+    preserveColor={true}
+  />
+  <Icon
+    name="exenova-logo-inverted"
+    class="[display:var(--theme-logo-inverted)] h-10 w-auto md:h-12"
+    preserveColor={true}
+  />
+  <span class="sr-only">{SITE_CONFIG.authorName}</span>
+</a>

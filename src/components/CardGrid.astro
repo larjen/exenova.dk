@@ -1,0 +1,20 @@
+---
+/**
+ * @file CardGrid.astro
+ * @description Renders a grid of article cards with consistent spacing.
+ * Centralizes the list layout pattern for listing pages.
+ * @property {CollectionEntry<'notes'>[]} posts - Array of note entries to render.
+ */
+import type { CollectionEntry } from 'astro:content';
+import ArticleCard from './ArticleCard.astro';
+
+interface Props {
+  posts: CollectionEntry<'notes'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="rhythm-stack pt-10">
+  {posts.map((post) => <ArticleCard post={post} />)}
+</div>

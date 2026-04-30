@@ -1,0 +1,14 @@
+{
+  "ignoreExportsUsedInFile": true,
+  "ignoreDependencies": ["pagefind", "gh-pages"],
+  "astro": {
+    "entry": [
+      "src/pages/**/*.astro",
+      "src/pages/**/*.ts",
+      "src/scripts/**/*.ts",
+      "src/env.d.ts",
+      "src/content.config.ts",
+      "astro.config.mjs"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+---
+/**
+ * @file ArticleMeta.astro
+ * @description Composite block that groups the publication date and tags.
+ * Enforces consistent metadata layout across article previews and headers.
+ * @property {string} [date] - Raw ISO date string.
+ * @property {string[]} [tags] - Array of tag strings.
+ * @property {boolean} [compact=false] - Hides the date when true.
+ */
+import DateBadge from './DateBadge.astro';
+import TagList from './TagList.astro';
+
+interface Props {
+  date?: string;
+  tags?: string[];
+  compact?: boolean;
+}
+
+const { date, tags, compact = false } = Astro.props;
+---
+
+<div class="relative z-10 flex items-center gap-4">
+  {date && !compact && <DateBadge date={date} />}
+  {tags && tags.length > 0 && <TagList tags={tags} />}
+</div>

@@ -1,0 +1,26 @@
+---
+/**
+ * @file 404.astro
+ * @description Custom 404 error page for non-existent routes.
+ * This page leverages Astro's automatic 404.html static generation for GitHub Pages deployment.
+ * When built, Astro outputs this as dist/404.html which GitHub Pages automatically serves for missing routes.
+ * @see https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#error-document-fallback
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+---
+
+<BaseLayout
+  title="404 | Page Not Found"
+  description="The page you are looking for does not exist."
+  currentPath="/"
+  searchable={false}
+  showBreadcrumbs={false}
+  centerContent={true}
+>
+  <div class="rhythm-stack items-center justify-center text-center">
+    <h1 class="type-h1 text-theme-muted">404</h1>
+    <p class="type-subheading text-theme-muted">Page not found</p>
+    <Button href="/">Return to Home</Button>
+  </div>
+</BaseLayout>

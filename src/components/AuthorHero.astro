@@ -1,0 +1,51 @@
+---
+/**
+ * @file AuthorHero.astro
+ * @description Hero section block displaying author introduction, image, and subtitle.
+ * Visual styling is resolved via theme CSS cascade.
+ * @property {string} title - Main heading text.
+ * @property {string} subtitle - Subheading text, structurally forced to the bottom.
+ * @property {import('astro:assets').ImageMetadata} image - Profile image object.
+ * @property {string} imageAlt - Alt text for the profile image.
+ * @slot Default slot for injecting body prose and action buttons below the hero header.
+ */
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  image: ImageMetadata;
+  imageAlt: string;
+}
+
+const { title, subtitle, image, imageAlt } = Astro.props;
+---
+
+<section class="rhythm-section rhythm-stack">
+  {/* Title and Image Row */}
+  <div class="flex flex-col items-center md:flex-row md:items-start md:justify-between">
+    <div class="order-2 flex-1 md:order-1">
+      <h1 class="type-h1 text-theme-text">{title}</h1>
+    </div>
+    <div class="order-1 shrink-0 pb-10 pl-0 md:order-2 md:pb-0 md:pl-10">
+      <div class="bg-theme-border/10 flex items-center justify-center rounded-full p-2">
+        <Image
+          src={image}
+          alt={imageAlt}
+          class="h-40 w-40 rounded-full object-cover md:h-40 md:w-40"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </div>
+
+  {/* Subtitle strictly at the bottom */}
+  <div class="rhythm-stack">
+    <p class="type-subheading text-theme-text">{subtitle}</p>
+  </div>
+
+  <div class="rhythm-stack">
+    <slot />
+  </div>
+</section>

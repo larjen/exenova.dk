@@ -1,0 +1,92 @@
+---
+/**
+ * @file BaseLayout.astro
+ * @description Global HTML structure for the system theme.
+ * Merges container layout logic previously in PageContainer.
+ * @property {string} title - Page title
+ * @property {string} [description] - SEO description
+ * @property {string} [image] - Open Graph image URL. Defaults to profile-sharing.jpg for consistent OG rendering.
+ * @property {string} [currentPath] - Active navigation path
+ * @property {boolean} [flushFooter=false] - If true, Footer sits flush
+ * @property {'brand-reading' | 'brand' | 'brand-complimented' | 'brand-inverted'} [theme='brand-reading'] - Controls background and text via CSS custom properties
+ * @property {boolean} [searchable=false] - If true, allows Pagefind to index the page. Defaults to false.
+ * @property {'main' | 'article' | 'div'} [as='main'] - HTML element for container
+ * @property {'standard' | 'hero'} [variant='standard'] - Layout variant determines styling
+ * @property {boolean} [showBreadcrumbs=true] - When false, suppresses breadcrumb rendering
+ * @property {string} [currentTitle] - Optional title to pass to Breadcrumbs component
+ * @property {boolean} [centerContent=false] - When true, vertically centers slot content
+ */
+import { SITE_CONFIG } from '../config/site';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SeoHead from '../components/SeoHead.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import profileImgSharing from '../assets/images/profile-sharing.jpg';
+import '../styles/global.css';
+import 'lite-youtube-embed/src/lite-yt-embed.css';
+
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  currentPath?: string;
+  flushFooter?: boolean;
+  theme?: 'brand-reading' | 'brand' | 'brand-complimented' | 'brand-inverted';
+  searchable?: boolean;
+  as?: 'main' | 'article' | 'div';
+  variant?: 'standard' | 'hero';
+  showBreadcrumbs?: boolean;
+  currentTitle?: string;
+  centerContent?: boolean;
+}
+
+const {
+  title,
+  description = SITE_CONFIG.defaultDescription,
+  image = profileImgSharing.src,
+  currentPath = '/',
+  flushFooter = false,
+  theme = 'brand-reading',
+  searchable = false,
+  variant = 'standard',
+  showBreadcrumbs = true,
+  currentTitle,
+  centerContent = false,
+} = Astro.props;
+
+const containerClass = variant === 'hero' ? 'container-hero' : 'container-system';
+const centerClass = centerContent ? ' flex flex-1 flex-col justify-center' : '';
+
+const bodyClass = `min-h-screen flex flex-col antialiased overflow-y-scroll transition-colors duration-300 bg-theme-bg text-theme-text`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SeoHead title={title} description={description} image={image} />
+  </head>
+  <body
+    class={bodyClass}
+    data-theme={theme}
+    {...!searchable ? { 'data-pagefind-ignore': 'all' } : {}}
+  >
+    <Header currentPath={currentPath} />
+
+    {/* Top Bar Zone: Full width background, reading-width content */}
+    <div class="container-breadcrumbs">
+      <div class="container-text rhythm-stack-small">
+        {showBreadcrumbs && <Breadcrumbs currentTitle={currentTitle} />}
+        <slot name="top-bar" />
+      </div>
+    </div>
+
+    <div class={containerClass + centerClass}>
+      <slot />
+    </div>
+    <Footer flush={flushFooter} />
+  </body>
+</html>
+
+<script>
+  import 'lite-youtube-embed';
+</script>

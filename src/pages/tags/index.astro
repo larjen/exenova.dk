@@ -1,0 +1,35 @@
+---
+/**
+ * @file index.astro
+ * @description Tag index page. Displays a cloud of all unique tags used across published notes.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TagList from '../../components/TagList.astro';
+import { getUniqueTags } from '../../utils/content';
+import { SITE_CONFIG } from '../../config/site';
+
+const tags = await getUniqueTags();
+---
+
+<BaseLayout
+  title={`Tags | ${SITE_CONFIG.authorName}`}
+  description="Explore notes."
+  currentPath={Astro.url.pathname}
+  showBreadcrumbs={true}
+>
+  <Fragment slot="top-bar">
+    <div class="min-h-[1.5rem] w-full"></div>
+  </Fragment>
+
+  <div class="rhythm-stack pt-20">
+    <h1 class="type-h3 text-theme-text">Explore notes by tag</h1>
+
+    {
+      tags.length > 0 ? (
+        <TagList tags={tags} />
+      ) : (
+        <p class="type-body text-theme-text">No tags found.</p>
+      )
+    }
+  </div>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+/**
+ * @file Kicker.astro
+ * @description Eyebrow/kicker component for small, wide-tracked uppercase text above headings.
+ * Visual styling is resolved via theme CSS cascade.
+ * @property {string} [class] - Optional Tailwind CSS classes for layout overrides.
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<span class={`type-kicker text-theme-muted ${className}`}>
+  <slot />
+</span>

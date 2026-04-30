@@ -1,0 +1,25 @@
+---
+/**
+ * @file search.astro
+ * @description Client-side search interface powered by Pagefind.
+ * Uses the Pagefind headless API to fetch results while maintaining a custom Tailwind UI.
+ * Note: Search functionality requires a production build (`npm run build`) to generate the index.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchInterface from '../components/SearchInterface.astro';
+import { SITE_CONFIG } from '../config/site';
+---
+
+<BaseLayout
+  title={`Search | ${SITE_CONFIG.authorName}`}
+  description="Search through notes."
+  currentPath="/search"
+>
+  <Fragment slot="top-bar">
+    <div id="search-pagination-container" class="min-h-[1.5rem] w-full"></div>
+  </Fragment>
+
+  <SearchInterface />
+</BaseLayout>
+
+<script src="../scripts/searchClient.ts"></script>

@@ -1,0 +1,41 @@
+---
+/**
+ * @file StyleGuideSection.astro
+ * @description Standardized section wrapper for the internal style guide.
+ * Encapsulates the common pattern of heading, description, content slot, and files footer.
+ * Adheres to the theme cascade policy using semantic theme tokens.
+ * @property {string} id - The section ID used for anchor links and scroll targeting.
+ * @property {string} title - The section heading text.
+ * @property {string} description - The section subtext describing the component group.
+ * @property {string} files - Comma-separated list of source files shown in the footer.
+ * @property {string} [contentClass] - Optional Tailwind classes for the content wrapper. Defaults to 'p-8 bg-theme-bg'.
+ */
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+  files: string;
+  contentClass?: string;
+}
+
+const {
+  id,
+  title,
+  description,
+  files,
+  contentClass = 'p-8 bg-white rounded-sm border border-theme-border/30',
+} = Astro.props;
+---
+
+<section id={id} class="rhythm-stack scroll-mt-32">
+  <div class="prose">
+    <h2 class="type-h2 text-theme-text">{title}</h2>
+    <p class="type-body text-theme-text">{description}</p>
+  </div>
+  <div class={contentClass}>
+    <slot />
+  </div>
+  <div class="text-system-caps text-theme-muted">
+    Files: {files}
+  </div>
+</section>

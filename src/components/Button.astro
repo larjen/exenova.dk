@@ -1,0 +1,38 @@
+---
+/**
+ * @file Button.astro
+ * @description A high-fashion, system-style button component.
+ * Uses ultra-thin borders and extended tracking for a minimalist aesthetic.
+ * Visual styling is resolved via theme CSS cascade.
+ * @property {string} href - The destination URL for the button.
+ * @property {'primary' | 'secondary' | 'cta'} [variant='primary'] - Visual variant.
+ * @property {boolean} [openInNewTab=false] - If true, opens link in a new tab.
+ */
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'cta';
+  openInNewTab?: boolean;
+}
+
+const { href, variant = 'primary', openInNewTab = false } = Astro.props;
+
+const baseStyles = `type-button inline-flex justify-center items-center px-10 py-5 group relative overflow-hidden border-[0.5px] transition-colors duration-300 transform-gpu`;
+
+const variantMap: Record<string, string> = {
+  primary:
+    'bg-transparent border-theme-border text-theme-text hover:bg-theme-text hover:text-theme-bg',
+  secondary:
+    'bg-transparent border-transparent text-theme-muted hover:text-theme-text hover:border-theme-text',
+  cta: 'bg-system-accent-inverted-hover border-system-accent-inverted-hover text-system-bg hover:bg-system-brand hover:border-system-brand',
+};
+
+const variantStyles = variantMap[variant];
+---
+
+<a
+  href={href}
+  class={`${baseStyles} ${variantStyles}`}
+  {...openInNewTab ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+>
+  <span class="relative z-10"><slot /></span>
+</a>

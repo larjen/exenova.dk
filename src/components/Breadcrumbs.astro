@@ -1,0 +1,60 @@
+---
+/**
+ * @file Breadcrumbs.astro
+ * @description Auto-generating breadcrumb navigation based on the current URL.
+ * Build-time only - parses Astro.url.pathname to generate semantic breadcrumb trail.
+ * Visual styling is resolved via theme CSS cascade.
+ * @property {string} [currentTitle] - Optional override for the final breadcrumb text (e.g., an article title).
+ */
+import { formatLabel } from '../utils/formatters';
+
+interface Props {
+  currentTitle?: string;
+}
+
+const { currentTitle } = Astro.props;
+
+const pathname = Astro.url.pathname;
+const paths = pathname.split('/').filter(Boolean);
+
+const breadcrumbs = paths
+  .map((path, index) => {
+    const href = '/' + paths.slice(0, index + 1).join('/');
+
+    let label = formatLabel(path);
+
+    if (index === paths.length - 1 && currentTitle) {
+      label = currentTitle;
+    }
+
+    return { href, label, originalPath: path };
+  })
+  .map((crumb) => {
+    if (crumb.originalPath === 'search') {
+      crumb.label = 'Search';
+    }
+    return crumb;
+  });
+---
+
+<nav
+  aria-label="Breadcrumb"
+  class="type-ui text-theme-muted flex items-center gap-2"
+  data-pagefind-ignore="all"
+>
+  <a href="/" class="shrink-0">Home</a>
+  {
+    breadcrumbs.map((crumb, index) => (
+      <>
+        <span class="shrink-0">/</span>
+        {index === breadcrumbs.length - 1 ? (
+          <span class="text-theme-text truncate">{crumb.label}</span>
+        ) : (
+          <a href={crumb.href} class="hover:text-theme-text shrink-0 transition-colors">
+            {crumb.label}
+          </a>
+        )}
+      </>
+    ))
+  }
+</nav>

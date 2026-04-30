@@ -1,0 +1,35 @@
+---
+/**
+ * @file ArticleHeader.astro
+ * @description Orchestrates the metadata, title, and description block for an article.
+ * Encapsulates the standard article header pattern used in note detail pages.
+ * Wraps content in container-text for optimal line length.
+ * @property {string} title - The article title (rendered as H1).
+ * @property {string} description - The article description/subtitle.
+ * @property {string} date - The raw ISO date string.
+ * @property {string[]} tags - Array of tag strings for categorization.
+ */
+import ArticleMeta from './ArticleMeta.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  date?: string;
+  tags?: string[];
+}
+
+const { title, description, date, tags } = Astro.props;
+---
+
+<header class="container-text rhythm-section rhythm-stack">
+  {title && <h1 class="type-h1 text-theme-text">{title}</h1>}
+  {
+    description && (
+      <p class="type-subheading text-theme-text" data-pagefind-meta="description">
+        {description}
+      </p>
+    )
+  }
+
+  <ArticleMeta date={date} tags={tags} />
+</header>

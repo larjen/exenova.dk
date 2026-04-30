@@ -1,0 +1,21 @@
+---
+/**
+ * @file DateBadge.astro
+ * @description Renders a formatted publication date using a <time> element.
+ * Ensures semantic HTML and consistent date formatting across the site.
+ * Visual styling is centralized in global.css via the badge-date utility.
+ * @property {string} date - The raw ISO 8601 date string for the datetime attribute.
+ */
+import { formatDate } from '../utils/formatters';
+
+interface Props {
+  date: string;
+}
+
+const { date } = Astro.props;
+const displayDate = formatDate(date);
+---
+
+<time datetime={date} class="badge-date" data-pagefind-meta="date" data-pagefind-sort="date">
+  {displayDate}
+</time>

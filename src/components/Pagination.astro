@@ -1,0 +1,45 @@
+---
+/**
+ * @file Pagination.astro
+ * @description Reusable pagination navigation component for paginated listing pages.
+ * Visual styling is resolved via theme CSS cascade.
+ * @property {string | undefined} prevUrl - URL for the previous page link.
+ * @property {string | undefined} nextUrl - URL for the next page link.
+ * @property {number} currentPage - The current page number.
+ * @property {number} lastPage - The total number of pages.
+ */
+interface Props {
+  prevUrl?: string;
+  nextUrl?: string;
+  currentPage: number;
+  lastPage: number;
+}
+
+const { prevUrl, nextUrl, currentPage, lastPage } = Astro.props;
+---
+
+<nav aria-label="Pagination" class="flex items-center justify-between">
+  {
+    prevUrl ? (
+      <a href={prevUrl} class="type-ui text-theme-text">
+        &larr; Previous
+      </a>
+    ) : (
+      <span class="type-ui text-theme-muted/30 cursor-not-allowed">&larr; Previous</span>
+    )
+  }
+
+  <span class="type-ui text-theme-muted">
+    Page {currentPage} of {lastPage}
+  </span>
+
+  {
+    nextUrl ? (
+      <a href={nextUrl} class="type-ui text-theme-text">
+        Next &rarr;
+      </a>
+    ) : (
+      <span class="type-ui text-theme-muted/30 cursor-not-allowed">Next &rarr;</span>
+    )
+  }
+</nav>

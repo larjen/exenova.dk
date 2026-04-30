@@ -1,0 +1,208 @@
+{
+  "main": {
+    "id": "abd557acd622fcf3",
+    "type": "split",
+    "children": [
+      {
+        "id": "65d3bf5acc9b4083",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "130fd5976c71f329",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Ny fane"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c44c79eea2bec674",
+    "type": "split",
+    "children": [
+      {
+        "id": "80d49f0e4cf6a8d4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0188d87e61074664",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Stifinder"
+            }
+          },
+          {
+            "id": "a877b4da5c80e80a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Søg"
+            }
+          },
+          {
+            "id": "fe9f0a5571b572ea",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bogmærker"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "fbb95ecccd8ace94",
+    "type": "split",
+    "children": [
+      {
+        "id": "d81e57c134352223",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4553235a2f497a2e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Tilbagelinks"
+            }
+          },
+          {
+            "id": "b90fb7ad22bb81b2",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Udgående Links"
+            }
+          },
+          {
+            "id": "cd40622a0739b1ad",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "2ce982f892a4fa8a",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Alle egenskaber"
+            }
+          },
+          {
+            "id": "df4dee760dd2f037",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Disposition"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Åbn hurtig skifter": false,
+      "graph:Åbn grafvisning": false,
+      "canvas:Opret nyt lærred": false,
+      "daily-notes:Åbn dagens note": false,
+      "templates:Indsæt skabelon": false,
+      "command-palette:Åbn fastgjorte kommandoer": false,
+      "bases:Opret ny base": false
+    }
+  },
+  "active": "130fd5976c71f329",
+  "lastOpenFiles": [
+    "Ullamco Nulla.md",
+    "Occaecat Id Ut Adipiscing.md",
+    "Aliquip Sunt Laboris Magna Minim.md",
+    "Exercitation Irure Nisi Fugiat.md",
+    "Quis Consequat Elit Anim Laboris.md",
+    "Cupidatat Elit Dolor.md",
+    "Officia Exercitation Occaecat Laborum.md",
+    "In Dolore Lorem.md",
+    "Officia Magna Ullamco Esse.md",
+    "Magna Laborum Culpa Cupidatat Anim.md",
+    "Exercitation Culpa Ut.md",
+    "Culpa Incididunt Laborum Aliquip.md",
+    "Duis Aliquip Ea Excepteur Minim.md",
+    "Reprehenderit Sunt Incididunt Aliquip Sint.md",
+    "Minim Qui Nisi Labore.md",
+    "Ut Commodo Fugiat Commodo Adipiscing.md",
+    "Enim Dolor Incididunt Aliqua.md",
+    "Ex Labore Minim Ad.md",
+    "Elit Sed.md",
+    "In Ullamco Velit Ut.md",
+    "Adipiscing Eiusmod Velit Reprehenderit.md",
+    "Do Lorem Duis Fugiat Tempor.md",
+    "Consectetur Ea Duis Dolor Occaecat.md",
+    "Qui Pariatur.md",
+    "Labore Incididunt Nostrud Dolor Irure.md",
+    "Magna Proident Elit.md"
+  ]
+}

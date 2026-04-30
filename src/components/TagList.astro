@@ -1,0 +1,26 @@
+---
+/**
+ * @file TagList.astro
+ * @description Semantically groups a collection of TagPills into an unordered list.
+ * @property {string[]} tags - Array of tag strings to render.
+ */
+import TagPill from './TagPill.astro';
+
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+{
+  tags && tags.length > 0 && (
+    <ul class="rhythm-group m-0 list-none p-0" aria-label="Tags">
+      {tags.map((tag) => (
+        <li>
+          <TagPill tag={tag} />
+        </li>
+      ))}
+    </ul>
+  )
+}

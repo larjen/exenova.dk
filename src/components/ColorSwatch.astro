@@ -1,0 +1,21 @@
+---
+/**
+ * @file ColorSwatch.astro
+ * @description A visual representation of a color token for the style guide.
+ * @property {string} label - The human-readable name of the color.
+ * @property {string} hex - The hex code of the color.
+ * @property {string} class - The Tailwind classes dictating background and text color.
+ */
+interface Props {
+  label: string;
+  hex: string;
+  class: string;
+}
+
+const { label, hex, class: className } = Astro.props;
+---
+
+<div class={`border-theme-border border-[0.5px] p-4 ${className}`}>
+  <div class="type-swatch">{label}</div>
+  <div class="type-swatch-hex">{hex}</div>
+</div>

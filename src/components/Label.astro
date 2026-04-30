@@ -1,0 +1,19 @@
+---
+/**
+ * @file Label.astro
+ * @description Renders a label using typography.
+ * Visual styling is resolved via theme CSS cascade (text-theme-text).
+ * @property {string} label - The label text.
+ * @property {string} [class] - Optional additional Tailwind classes.
+ */
+interface Props {
+  label: string;
+  class?: string;
+}
+
+const { label, class: className = '' } = Astro.props;
+---
+
+<p class={`type-ui ${className}`}>
+  {label}
+</p>

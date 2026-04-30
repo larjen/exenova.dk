@@ -1,0 +1,57 @@
+---
+/**
+ * @file index.astro
+ * @description Executive landing page. High signal, zero noise.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AuthorHero from '../components/AuthorHero.astro';
+import Button from '../components/Button.astro';
+import Kicker from '../components/Kicker.astro';
+import profileImg from '../assets/images/profile.jpg';
+
+import { SITE_CONFIG } from '../config/site';
+---
+
+<BaseLayout
+  title="Lars Jensen | Digital Transformation & IT Leadership"
+  description="Bridging the gap between technology and business value. Insights on digital transformation, agentic AI, and strategic IT leadership by Lars Jensen."
+  currentPath="/"
+  theme="brand-complimented"
+  showBreadcrumbs={false}
+  centerContent={true}
+>
+  <Fragment slot="top-bar">
+    <span class="md:hidden"
+      ><Kicker class="text-center">Senior IT Leader | Executive MBA</Kicker></span
+    >
+    <span class="hidden md:inline"
+      ><Kicker>Digital Transformation | People IT Leader | Executive MBA</Kicker></span
+    >
+  </Fragment>
+
+  <AuthorHero
+    title="Bridging the gap between technology and real business value"
+    subtitle="Empowering teams and building the culture where great work happens"
+    image={profileImg}
+    imageAlt={SITE_CONFIG.authorName}
+  >
+    <div class="prose">
+      <p>
+        With over 20 years of experience spanning software development, product management, and
+        commercial strategy, my focus is on making technology work for the business. Having worked
+        closely with both the technical details and the broader commercial goals, I enjoy helping
+        organizations turn complex tech into practical, operational advantages.
+      </p>
+      <p>
+        I am actively exploring the practical applications of agentic AI. I'm curious about how we
+        can use these tools to solve management bottlenecks and support daily operations - while
+        keeping the human element at the center.
+      </p>
+    </div>
+    <div class="text-center">
+      <Button openInNewTab={true} href={`mailto:${SITE_CONFIG.email}`} variant="primary"
+        >Let's talk</Button
+      >
+    </div>
+  </AuthorHero>
+</BaseLayout>

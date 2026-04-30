@@ -1,0 +1,58 @@
+{
+  "name": "exenova.dk-astro",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --force",
+    "start": "astro dev --force",
+    "build": "astro build --force",
+    "preview": "astro preview",
+    "previewbuild": "npm run build && npm run preview",
+    "astro": "astro",
+    "deploy": "node -e \"const c=require('./site.config.json'); require('child_process').execSync('npm run build && npx gh-pages -d dist -t -b ' + c.deployBranch + ' -r ' + c.deployRepo, {stdio:'inherit'})\"",
+    "format": "prettier --write .",
+    "check": "astro check",
+    "lint:js": "eslint .",
+    "lint:css": "stylelint \"src/**/*.{css,astro}\"",
+    "lint:deadcode": "knip",
+    "lint": "npm run check && npm run lint:js && npm run lint:css && npm run lint:deadcode",
+    "validate": "npm run lint && npm run format"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
+    "@tailwindcss/vite": "^4.2.4",
+    "astro": "^6.1.9",
+    "lite-youtube-embed": "^0.3.4",
+    "rehype-figure": "^1.0.1",
+    "tailwindcss": "^4.2.4",
+    "unist-util-visit": "^5.1.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.2",
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/typography": "^0.5.19",
+    "@typescript-eslint/parser": "^8.59.0",
+    "eslint": "^10.2.1",
+    "eslint-plugin-astro": "^1.7.0",
+    "eslint-plugin-jsdoc": "^62.9.0",
+    "gh-pages": "^6.3.0",
+    "github-slugger": "^2.0.0",
+    "knip": "^6.9.0",
+    "pagefind": "^1.5.2",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "rehype-external-links": "^3.0.0",
+    "remark-wiki-link": "^2.0.1",
+    "stylelint": "^17.9.0",
+    "stylelint-config-html": "^1.1.0",
+    "stylelint-config-standard": "^40.0.0",
+    "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "vite": "^7",
+    "@astrojs/check": {
+      "typescript": "$typescript"
+    }
+  }
+}

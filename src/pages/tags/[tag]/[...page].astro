@@ -1,0 +1,58 @@
+---
+/**
+ * @file [...page].astro
+ * @description Dynamic, paginated route for displaying notes by a specific tag.
+ * Leverages Astro's native `paginate` function within `getStaticPaths`.
+ */
+import type { PaginateFunction } from 'astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CardGrid from '../../../components/CardGrid.astro';
+import Pagination from '../../../components/Pagination.astro';
+import { getUniqueTags, getNotesByTag } from '../../../utils/content';
+import { PAGE_CONFIG } from '../../../config/ui';
+import { SITE_CONFIG } from '../../../config/site';
+
+/**
+ * @description Generates paginated routes for every unique tag.
+ * @param {object} options - Astro's pagination options object.
+ * @param {PaginateFunction} options.paginate - Astro's native paginate function.
+ * @returns {Promise<any[]>} Array of paginated tag routes.
+ */
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }): Promise<any[]> {
+  const uniqueTags = await getUniqueTags();
+
+  const allPages = await Promise.all(
+    uniqueTags.map(async (tag) => {
+      const filteredPosts = await getNotesByTag(tag);
+      return paginate(filteredPosts, {
+        params: { tag },
+        pageSize: PAGE_CONFIG.notesPerPage,
+      });
+    })
+  );
+
+  return allPages.flat();
+}
+
+const { page } = Astro.props;
+const { tag } = Astro.params;
+---
+
+<BaseLayout
+  title={`Notes tagged with "${tag}" | ${SITE_CONFIG.authorName}`}
+  description={`Notes tagged with ${tag}.`}
+  currentPath={Astro.url.pathname}
+  showBreadcrumbs={true}
+>
+  <Fragment slot="top-bar">
+    <div class="min-h-[1.5rem] w-full">
+      <Pagination
+        prevUrl={page.url.prev}
+        nextUrl={page.url.next}
+        currentPage={page.currentPage}
+        lastPage={page.lastPage}
+      />
+    </div>
+  </Fragment>
+  <CardGrid posts={page.data} />
+</BaseLayout>

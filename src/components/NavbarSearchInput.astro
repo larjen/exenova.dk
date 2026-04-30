@@ -1,0 +1,32 @@
+---
+/**
+ * @file NavbarSearchInput.astro
+ * @description Search input field primitive for the navigation bar.
+ */
+import Icon from './Icon.astro';
+---
+
+<div class="relative flex max-w-xs items-center justify-end md:w-64">
+  <input
+    type="search"
+    id="custom-search-input"
+    autofocus
+    placeholder="Search notes..."
+    class="type-input border-theme-border text-theme-text focus:border-theme-text w-full border-b bg-transparent py-1 pr-8 transition-colors focus:outline-none [&::-ms-clear]:hidden [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-decoration]:hidden"
+    autocomplete="off"
+  />
+  <button
+    id="clear-search-btn"
+    type="button"
+    class="text-theme-text hover:text-theme-muted absolute right-0 -mr-2 hidden cursor-pointer p-2 transition-colors focus:outline-none"
+    aria-label="Clear search"
+  >
+    <Icon name="close" class="h-3 w-3" />
+  </button>
+  <div
+    id="search-active-icon"
+    class="text-theme-text pointer-events-none absolute right-0 -mr-2 p-2 transition-colors"
+  >
+    <Icon name="search" class="h-4 w-4" />
+  </div>
+</div>

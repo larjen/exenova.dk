@@ -1,0 +1,344 @@
+---
+/**
+ * @file StyleGuideViewer.astro
+ * @description Internal style guide component. Visual repository of all typography and UI components.
+ * Enforces design system consistency. New components must be added here per .cursorrules.
+ */
+import type { CollectionEntry } from 'astro:content';
+import Kicker from './Kicker.astro';
+import Button from './Button.astro';
+import DateBadge from './DateBadge.astro';
+import TagPill from './TagPill.astro';
+import ArticleCard from './ArticleCard.astro';
+import LogoLink from './LogoLink.astro';
+import SocialLink from './SocialLink.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import MenuItem from './MenuItem.astro';
+import Pagination from './Pagination.astro';
+import SearchInterface from './SearchInterface.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Icon from './Icon.astro';
+import StyleGuideSection from './StyleGuideSection.astro';
+import StyleGuideNav from './StyleGuideNav.astro';
+import Label from './Label.astro';
+import ColorSwatch from './ColorSwatch.astro';
+
+const mockPost = {
+  id: 'demo-article',
+  collection: 'notes',
+  data: {
+    title: 'The Future of Executive Leadership in Tech',
+    date: '2026-04-25',
+    description: 'An exploration of how AI will reshape the role of technology executives.',
+    draft: false,
+    tags: [],
+    related: [],
+  },
+  body: '',
+} as unknown as CollectionEntry<'notes'>;
+---
+
+<div class="container-breadcrumbs relative flex flex-col gap-16">
+  {/* Table of Contents Navigation */}
+  <StyleGuideNav />
+
+  {/* Component Showcase */}
+  <div class="container-breadcrumbs flex-1 space-y-24">
+    {/* DESIGN TOKENS */}
+    <StyleGuideSection
+      id="tokens"
+      title="Design Tokens: Typography"
+      description="Semantic font families and their designated weights within the system."
+      files="global.css"
+      contentClass="grid md:grid-cols-2 gap-8 p-8 bg-white rounded-sm border border-theme-border/30"
+    >
+      <div class="rhythm-stack-small">
+        <Label label="font-headline (Bodoni Moda)" />
+        <div class="font-headline text-theme-text space-y-4">
+          <div class="text-2xl font-light">Light (300) - Large Accents</div>
+          <div class="text-2xl font-normal">Regular (400) - Standard</div>
+          <div class="text-2xl font-medium">Medium (500) - UI Elements</div>
+          <div class="text-2xl font-bold">Bold (700) - Brand / Logos</div>
+        </div>
+      </div>
+      <div class="rhythm-stack-small">
+        <Label label="font-body (Lora)" />
+        <div class="font-body text-theme-text space-y-4">
+          <div class="text-2xl font-light">Light (300) - Body Copy</div>
+          <div class="text-2xl font-normal">Regular (400) - Standard</div>
+          <div class="text-2xl font-medium">Medium (500) - Emphasis</div>
+          <div class="text-2xl font-light italic">Italic (300) - Quotes / Kicker</div>
+        </div>
+      </div>
+    </StyleGuideSection>
+
+    <StyleGuideSection
+      id="colors"
+      title="Brand Colors"
+      description="Brand colors and their semantic meaning."
+      files="global.css"
+      contentClass="p-8 bg-white rounded-sm border border-theme-border/30"
+    >
+      <div class="rhythm-stack-small">
+        <Label label="Brand Accents (Exceptions)" />
+
+        <div class="full-w grid grid-cols-2 gap-4 md:grid-cols-4">
+          <ColorSwatch label="Brand" hex="#f63f0e" class="bg-system-brand text-system-bg" />
+          <ColorSwatch
+            label="Brand Inverted"
+            hex="#ecaa94"
+            class="bg-system-brand-inverted text-theme-text"
+          />
+          <ColorSwatch label="Accent" hex="#ffe6d7" class="bg-system-accent text-theme-text" />
+          <ColorSwatch
+            label="Accent Inverted"
+            hex="#75b2df"
+            class="bg-system-accent-inverted text-theme-text"
+          />
+          <ColorSwatch
+            label="Blue Hover"
+            hex="#2b5a7d"
+            class="bg-system-accent-inverted-hover text-system-bg"
+          />
+          <ColorSwatch
+            label="Background Soft"
+            hex="#ffeee4"
+            class="bg-system-bg-soft text-theme-text"
+          />
+        </div>
+      </div>
+    </StyleGuideSection>
+
+    {/* TYPOGRAPHY SCALE */}
+    <StyleGuideSection
+      id="typography"
+      title="Typography Scale"
+      description="Defines the structural heading and body text scale used across the application. Powered by the type-* utility classes in global.css."
+      files="global.css, Kicker.astro"
+      contentClass="space-y-12 p-8 bg-white rounded-sm border border-theme-border/30"
+    >
+      <div class="rhythm-stack-small">
+        <span class="text-system-caps text-theme-muted block">type-h1</span>
+        <h1 class="type-h1 text-theme-text">Heading Level 1</h1>
+      </div>
+
+      <div class="rhythm-stack-small">
+        <span class="text-system-caps text-theme-muted block">type-h2</span>
+        <h2 class="type-h2 text-theme-text">Heading Level 2</h2>
+      </div>
+
+      <div class="rhythm-stack-small">
+        <span class="text-system-caps text-theme-muted block">type-h3</span>
+        <h3 class="type-h3 text-theme-text">Heading Level 3</h3>
+      </div>
+
+      <div class="rhythm-stack-small">
+        <span class="text-system-caps text-theme-muted block">type-subheading</span>
+        <p class="type-subheading text-theme-text">Subheading / Italic Callout</p>
+      </div>
+
+      <div class="rhythm-stack-small">
+        <span class="text-system-caps text-theme-muted block">type-body</span>
+        <p class="type-body text-theme-text">
+          Default body text - Lora, light weight, relaxed line-height for maximum legibility. This
+          is used for standard interface text and descriptions.
+        </p>
+      </div>
+
+      <div class="rhythm-stack-small">
+        <span class="text-system-caps text-theme-muted block">type-ui</span>
+        <p class="type-ui text-theme-text">Systemic UI (Nav, Tags, Pagination, Breadcrumbs)</p>
+      </div>
+
+      <div class="rhythm-stack-small">
+        <span class="text-system-caps text-theme-muted block">type-button</span>
+        <p class="type-button text-theme-text">Action Button Text</p>
+      </div>
+
+      <div class="rhythm-stack-small">
+        <span class="text-system-caps text-theme-muted block">&lt;Kicker&gt; Component</span>
+        <Kicker>Kicker Default</Kicker>
+      </div>
+    </StyleGuideSection>
+
+    {/* PROSE */}
+    <StyleGuideSection
+      id="prose"
+      title="Prose / Markdown"
+      description="Simulates the output of rendered markdown content from the CMS, constrained by the .prose utility class."
+      files="global.css (.prose selectors)"
+    >
+      <div class="prose">
+        <h2>The Architecture of Thought</h2>
+        <p>
+          Software architecture is not merely about choosing frameworks or structuring directories.
+          It is the art of making decisions that allow a system to evolve gracefully.
+        </p>
+        <blockquote>
+          "Perfection is achieved not when there is nothing more to add, but when there is nothing
+          left to take away."
+        </blockquote>
+        <p>
+          <strong>Key insight:</strong> The most maintainable codebases are those where every line has
+          a clear purpose. This is the essence of <mark>clean architecture</mark>.
+        </p>
+      </div>
+    </StyleGuideSection>
+
+    {/* BUTTONS */}
+    <StyleGuideSection
+      id="buttons"
+      title="Buttons"
+      description="Primary action triggers. Minimalist, text-based with wide letter spacing."
+      files="Button.astro"
+      contentClass="flex flex-wrap gap-4 p-8 bg-white rounded-sm border border-theme-border/30"
+    >
+      <Button href="#">Primary Button</Button>
+      <Button href="#" variant="secondary">Secondary Button</Button>
+      <Button href="#" variant="cta">CTA Button</Button>
+    </StyleGuideSection>
+
+    {/* NAVIGATION */}
+    <StyleGuideSection
+      id="navigation"
+      title="Navigation"
+      description="Structural wayfinding elements used across the platform. The active state utilizes the brand color border for semantic clarity."
+      files="Breadcrumbs.astro, MenuItem.astro, Pagination.astro"
+      contentClass="flex flex-col gap-8 p-8 bg-white rounded-sm border border-theme-border/30"
+    >
+      <div class="rhythm-stack-small">
+        <Label label="Breadcrumbs" />
+        <Breadcrumbs />
+      </div>
+      <div class="rhythm-stack-small">
+        <Label label="Menu Items" />
+        <div class="flex gap-6">
+          <MenuItem href="#" currentPath="#" label="Active State" />
+          <MenuItem href="#inactive" currentPath="#" label="Inactive State" />
+        </div>
+      </div>
+      <div class="rhythm-stack-small border-theme-border border-t pt-8">
+        <Label label="Pagination" />
+        <Pagination prevUrl="#prev" nextUrl="#next" currentPage={2} lastPage={5} />
+      </div>
+    </StyleGuideSection>
+
+    {/* INTERACTIVE */}
+    <StyleGuideSection
+      id="interactive"
+      title="Interactive Links"
+      description="Standardized link components for branding and social outlinks."
+      files="LogoLink.astro, SocialLink.astro, IconLogo.astro, BaseIcon.astro"
+      contentClass="flex flex-col gap-8 p-8 bg-white rounded-sm border border-theme-border/30"
+    >
+      <div class="rhythm-stack-small">
+        <Label label="Logo Link" />
+        <LogoLink />
+      </div>
+      <div class="rhythm-stack-small">
+        <Label label="Social Links" />
+        <div class="flex flex-wrap gap-6">
+          <SocialLink href="#" label="GitHub"><Icon name="github" /></SocialLink>
+          <SocialLink href="#" label="LinkedIn"><Icon name="linkedin" /></SocialLink>
+        </div>
+      </div>
+    </StyleGuideSection>
+
+    {/* FORMS & INPUTS */}
+    <StyleGuideSection
+      id="forms"
+      title="Forms & Inputs"
+      description="User input fields and interactive data retrieval."
+      files="SearchInterface.astro"
+    >
+      <Label label="Search Interface" />
+      <SearchInterface />
+    </StyleGuideSection>
+
+    {/* TAGS */}
+    <StyleGuideSection
+      id="tags"
+      title="Tags"
+      description="Taxonomy elements with a soft 0.25rem rounded corner."
+      files="TagPill.astro"
+    >
+      <div class="flex flex-wrap items-center gap-4">
+        <TagPill tag="Architecture" />
+        <TagPill tag="Leadership" />
+        <TagPill tag="Process" />
+      </div>
+    </StyleGuideSection>
+
+    {/* METADATA */}
+    <StyleGuideSection
+      id="metadata"
+      title="Metadata"
+      description="Components used to display data attributes like dates on articles."
+      files="DateBadge.astro"
+    >
+      <div class="flex flex-wrap items-center gap-4">
+        <DateBadge date="April 25, 2026" />
+      </div>
+    </StyleGuideSection>
+
+    {/* CARDS */}
+    <StyleGuideSection
+      id="cards"
+      title="Article Previews (Editorial List)"
+      description="Typographic list items with 1px dividers in system-brand-inverted (Peach/Brand Inverted)."
+      files="ArticleCard.astro"
+      contentClass="flex flex-col p-8 bg-white rounded-sm border border-theme-border/30"
+    >
+      <div class="rhythm-stack-small">
+        <Label label="Article Card" />
+        <ArticleCard post={mockPost} />
+        <ArticleCard post={mockPost} />
+      </div>
+    </StyleGuideSection>
+
+    {/* LAYOUT */}
+    <StyleGuideSection
+      id="layout"
+      title="Layout Elements"
+      description="Major structural blocks that define the page architecture."
+      files="Header.astro, Footer.astro"
+    >
+      <div class="space-y-8">
+        <div
+          class="border-theme-border/30 pointer-events-none relative overflow-hidden rounded-sm border bg-white"
+        >
+          <Label label="Header" class="absolute top-2 right-4 z-10" />
+          <Header currentPath="/style-guide" />
+        </div>
+
+        <div
+          class="border-theme-border/30 pointer-events-none relative overflow-hidden rounded-sm border bg-white"
+        >
+          <Label label="Footer" class="absolute top-4 left-6 z-10" />
+          <div class="pt-12"><Footer flush={true} /></div>
+        </div>
+
+        <div>
+          <Label label="PageTitle (Standard — centered)" class="pb-4" />
+          <div class="border-theme-border/30 rounded-sm border bg-white p-8">
+            <h1 class="type-h1 text-theme-text">The Future of Executive Leadership</h1>
+            <p class="type-subheading text-theme-text">
+              An exploration of how AI will reshape technology roles.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <Label label="PageTitle (Inverted — responsive)" class="pb-4" />
+          <div class="bg-[#0a0a0a] p-8">
+            <h1 class="type-h1 text-theme-text">Morten G. Lind</h1>
+            <p class="type-subheading text-theme-text">
+              Executive coach and former C-suite technology leader.
+            </p>
+          </div>
+        </div>
+      </div>
+    </StyleGuideSection>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+---
+/**
+ * @file StyleGuideNav.astro
+ * @description Table of contents navigation for the internal style guide.
+ */
+
+import Label from './Label.astro';
+import { SITE_CONFIG } from '../config/site';
+---
+
+<nav class="rhythm-stack-small bg-white p-10">
+  <Label label="Pages" />
+  <ul class="type-ui text-theme-muted flex flex-wrap gap-x-8 gap-y-4">
+    {
+      SITE_CONFIG.includeNotes && (
+        <>
+          <li>
+            <a target="_blank" href="/search" class="hover:text-theme-text transition-colors">
+              Search
+            </a>
+          </li>
+          <li>
+            <a target="_blank" href="/tags" class="hover:text-theme-text transition-colors">
+              Tags
+            </a>
+          </li>
+        </>
+      )
+    }
+    <li>
+      <a target="_blank" href="robots.txt" class="hover:text-theme-text transition-colors"
+        >robots.txt</a
+      >
+    </li>
+    <li>
+      <a target="_blank" href="sitemap-index.xml" class="hover:text-theme-text transition-colors"
+        >sitemap-index.xml</a
+      >
+    </li>
+  </ul>
+
+  <Label label="Navigation" />
+  <ul class="type-ui text-theme-muted flex flex-wrap gap-x-8 gap-y-4">
+    <li><a href="#tokens" class="hover:text-theme-text transition-colors">Design Tokens</a></li>
+    <li><a href="#colors" class="hover:text-theme-text transition-colors">Brand Colors</a></li>
+    <li><a href="#typography" class="hover:text-theme-text transition-colors">Typography</a></li>
+    <li><a href="#prose" class="hover:text-theme-text transition-colors">Prose / Markdown</a></li>
+    <li><a href="#buttons" class="hover:text-theme-text transition-colors">Buttons</a></li>
+    <li><a href="#navigation" class="hover:text-theme-text transition-colors">Navigation</a></li>
+    <li><a href="#interactive" class="hover:text-theme-text transition-colors">Interactive</a></li>
+    <li><a href="#forms" class="hover:text-theme-text transition-colors">Forms & Inputs</a></li>
+    <li><a href="#tags" class="hover:text-theme-text transition-colors">Tags</a></li>
+    <li><a href="#metadata" class="hover:text-theme-text transition-colors">Metadata</a></li>
+    <li><a href="#cards" class="hover:text-theme-text transition-colors">Cards</a></li>
+    <li><a href="#layout" class="hover:text-theme-text transition-colors">Layout</a></li>
+  </ul>
+</nav>

@@ -1,0 +1,54 @@
+---
+/**
+ * @file SearchInterface.astro
+ * @description Search results container for the Pagefind-powered search.
+ * Renders live results area with client-side pagination.
+ * Visual styling is resolved via theme CSS cascade.
+ */
+---
+
+<template id="search-result-template">
+  <article class="group card-article first:border-t-0">
+    <div class="flex flex-col gap-2">
+      <h2 class="type-h3 text-theme-text">
+        <a href="" class="search-result-title after:absolute after:inset-0 focus:outline-none"></a>
+      </h2>
+      <p class="type-body text-theme-text search-result-excerpt"></p>
+    </div>
+    <div class="search-result-meta relative z-10 flex items-center gap-4">
+      <ul class="search-result-tags m-0 flex list-none flex-wrap gap-4 p-0" aria-label="Tags"></ul>
+    </div>
+  </article>
+</template>
+
+<template id="search-date-template">
+  <time class="badge-date"></time>
+</template>
+
+<template id="search-tag-template">
+  <li>
+    <a href="" class="pill-tag"></a>
+  </li>
+</template>
+
+<template id="search-pagination-template">
+  <nav aria-label="Pagination" class="flex items-center justify-between">
+    <a href="#" id="search-prev-btn" class="type-ui text-theme-text hidden">&larr; Previous</a>
+    <span id="search-prev-disabled" class="type-ui text-theme-muted hidden cursor-not-allowed"
+      >&larr; Previous</span
+    >
+
+    <span id="search-page-info" class="type-ui text-theme-muted"></span>
+
+    <a href="#" id="search-next-btn" class="type-ui text-theme-text hidden">Next &rarr;</a>
+    <span id="search-next-disabled" class="type-ui text-theme-muted hidden cursor-not-allowed"
+      >Next &rarr;</span
+    >
+  </nav>
+</template>
+
+<template id="search-empty-template">
+  <p class="type-body-compact text-theme-muted search-empty-msg"></p>
+</template>
+
+<div id="custom-search-results" class="rhythm-stack pt-10" aria-live="polite"></div>

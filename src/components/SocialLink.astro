@@ -1,0 +1,26 @@
+---
+/**
+ * @file SocialLink.astro
+ * @description Renders a social/media link with an optional icon slot.
+ * Used in Footer for GitHub, LinkedIn, and other external links.
+ * Visual styling is resolved via theme CSS cascade.
+ * @property {string} href - The URL the link points to.
+ * @property {string} label - The accessible label/text for the link.
+ */
+interface Props {
+  href: string;
+  label: string;
+}
+
+const { href, label } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="type-ui text-theme-text [&_svg]:text-theme-text [&_svg]:fill-theme-text [&_svg_*]:fill-theme-text flex items-center gap-2 opacity-50 transition-opacity duration-300 hover:opacity-100"
+>
+  <slot />
+  {label}
+</a>

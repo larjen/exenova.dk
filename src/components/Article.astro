@@ -1,0 +1,18 @@
+---
+/**
+ * @file Article.astro
+ * @description Semantic wrapper for long-form content.
+ * Enforces text font family, prose constraints, and reading-width container.
+ * @property {string} [class] - Optional utility classes for overrides.
+ */
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<article class={`prose ${className}`}>
+  <slot />
+</article>

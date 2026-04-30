@@ -1,0 +1,20 @@
+---
+/**
+ * @file TagPill.astro
+ * @description Reusable tag link component for displaying thought tags.
+ * Taxonomy elements with a semi-transparent background using theme border colors.
+ * Visual styling is centralized in global.css via the pill-tag utility.
+ * @property {string} tag - The tag name to display and link to.
+ */
+import { formatLabel } from '../utils/formatters';
+
+interface Props {
+  tag: string;
+}
+
+const { tag } = Astro.props;
+---
+
+<a href={`/tags/${tag}`} data-pagefind-filter={`tag:${tag}`} class="pill-tag">
+  {formatLabel(tag)}
+</a>

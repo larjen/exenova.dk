@@ -1,0 +1,342 @@
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/typography';
+
+/* ==========================================================================
+   1. THEME TOKENS
+   ========================================================================== */
+@theme {
+  /* Font Families */
+  --font-system: 'Inter', system-ui, sans-serif;
+  --font-headlines: 'Bodoni Moda', ui-serif, Georgia, serif;
+  --font-text: 'Lora', ui-serif, Georgia, serif;
+
+  /* Base Colors */
+  --color-system-black: #0a0a0a;
+  --color-system-bg: #fdfdfd;
+  --color-system-bg-soft: #ffeee4;
+  --color-system-white: #fff;
+  --color-system-muted: #737373;
+  --color-system-border: #e5e5e5;
+
+  /* Brand Accents */
+  --color-system-brand: #f63f0e;
+  --color-system-brand-inverted: #ecaa94;
+  --color-system-accent: #ffe6d7;
+  --color-system-accent-inverted: #75b2df;
+  --color-system-accent-inverted-hover: #2b5a7d;
+
+  /* Register dynamic theme tokens in Tailwind */
+  --color-theme-bg: #ffeee4;
+  --color-theme-text: #0a0a0a;
+  --color-theme-muted: #737373;
+  --color-theme-border: #ecaa94;
+  --font-sans: var(--font-system);
+  --font-serif: var(--font-text);
+}
+
+/* ==========================================================================
+   2. DYNAMIC COLOR CASCADE
+   ========================================================================== */
+:root,
+[data-theme='brand-reading'] {
+  --color-theme-bg: #ffeee4;
+  --color-theme-text: #0a0a0a;
+  --color-theme-muted: #737373;
+  --color-theme-border: #ecaa94;
+  --theme-logo-base: block;
+  --theme-logo-inverted: none;
+}
+
+[data-theme='brand'] {
+  --color-theme-bg: #f63f0e;
+  --color-theme-text: #fff;
+  --color-theme-muted: rgb(255 255 255 / 70%);
+  --color-theme-border: #fff;
+  --theme-logo-base: none;
+  --theme-logo-inverted: block;
+}
+
+[data-theme='brand-complimented'] {
+  --color-theme-bg: #2b5a7d;
+  --color-theme-text: #fff;
+  --color-theme-muted: rgb(255 255 255 / 70%);
+  --color-theme-border: #75b2df;
+  --theme-logo-base: none;
+  --theme-logo-inverted: block;
+}
+
+[data-theme='brand-inverted'] {
+  --color-theme-bg: #ecaa94;
+  --color-theme-text: #0a0a0a;
+  --color-theme-muted: #737373;
+  --color-theme-border: #0a0a0a;
+  --theme-logo-base: block;
+  --theme-logo-inverted: none;
+}
+
+/* ==========================================================================
+   3. BASE HTML
+   ========================================================================== */
+body {
+  font-family: var(--font-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  font-family: var(--font-headlines);
+}
+
+mark {
+  background-color: transparent;
+  font-weight: 500;
+  color: currentColor;
+  border-bottom: 1px solid currentColor;
+  padding: 0 2px;
+}
+
+/* ==========================================================================
+   4. PROSE (MARKDOWN / EDITORIAL SPACING)
+   ========================================================================== */
+.prose {
+  /* Wire Tailwind Typography plugin to our dynamic theme variables */
+  --tw-prose-body: var(--color-theme-text);
+  --tw-prose-headings: var(--color-theme-text);
+  --tw-prose-links: var(--color-theme-text);
+  --tw-prose-bold: var(--color-theme-text);
+  --tw-prose-quotes: var(--color-theme-muted);
+  --tw-prose-counters: var(--color-theme-muted);
+  --tw-prose-bullets: var(--color-theme-muted);
+
+  max-width: none;
+}
+
+.prose p {
+  @apply type-body;
+
+  margin-bottom: 1rem;
+}
+
+.prose p:last-child {
+  margin-bottom: 0;
+}
+
+.prose h1 {
+  @apply type-h1;
+
+  margin-bottom: 1rem;
+}
+
+.prose h2 {
+  @apply type-h2;
+
+  margin-bottom: 1rem;
+}
+
+.prose h3 {
+  @apply type-h3;
+
+  margin-bottom: 1rem;
+}
+
+.prose h4 {
+  @apply type-h4;
+
+  margin-bottom: 1rem;
+}
+
+.prose h5 {
+  @apply type-h5;
+
+  margin-bottom: 1rem;
+}
+
+.prose h6 {
+  @apply type-h6;
+
+  margin-bottom: 1rem;
+}
+
+.prose figure {
+  margin-top: 0;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.prose figcaption {
+  font-family: var(--font-text);
+  font-weight: 300;
+  line-height: 2;
+  color: var(--color-theme-muted);
+  text-align: center;
+  font-style: italic;
+}
+
+.prose blockquote {
+  border-left: 0.03125rem solid var(--color-theme-border);
+  font-style: italic;
+  font-weight: 300;
+  padding-left: 2rem;
+  margin: 4rem 0;
+}
+
+/* ==========================================================================
+   5. UI UTILITIES
+   ========================================================================== */
+
+/* Typography Utilities */
+@utility type-h1 {
+  @apply font-headlines text-4xl leading-tight font-normal tracking-tight md:text-5xl;
+}
+
+@utility type-h2 {
+  @apply font-headlines text-3xl leading-tight font-normal tracking-tight md:text-3xl;
+}
+
+@utility type-h3 {
+  @apply font-headlines text-2xl leading-tight font-normal tracking-tight;
+}
+
+@utility type-h4 {
+  @apply font-headlines text-xl leading-tight font-medium;
+}
+
+@utility type-h5 {
+  @apply font-headlines text-lg leading-tight font-medium;
+}
+
+@utility type-h6 {
+  @apply font-headlines text-base leading-tight font-medium;
+}
+
+@utility type-subheading {
+  @apply font-text text-2xl font-light italic md:text-3xl;
+}
+
+@utility type-body {
+  @apply font-text text-base leading-relaxed font-normal;
+}
+
+@utility type-body-compact {
+  @apply font-text text-sm leading-relaxed font-normal;
+}
+
+@utility type-input {
+  @apply font-system text-sm font-normal;
+}
+
+@utility type-ui {
+  @apply font-system text-system-caps font-medium tracking-widest;
+}
+
+@utility type-button {
+  @apply font-system text-system-caps font-medium tracking-[0.25em];
+}
+
+@utility type-kicker {
+  @apply font-system text-system-caps block font-medium tracking-[0.3em];
+}
+
+@utility type-swatch {
+  @apply font-system text-xs font-medium tracking-widest uppercase;
+}
+
+@utility type-swatch-hex {
+  @apply font-system text-xs font-medium;
+}
+
+@utility text-system-caps {
+  font-family: var(--font-system);
+  font-weight: 800;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Container Utilities */
+@utility container-breadcrumbs {
+  display: block;
+  width: 100%;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1.5rem 1.5rem 0;
+}
+
+@utility container-system {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem 1.5rem 0;
+}
+
+@utility container-text {
+  width: 100%;
+  max-width: 45rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@utility container-hero {
+  position: relative;
+  flex: 1 1 0%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 1.5rem;
+}
+
+/* Structural Rhythm Utilities */
+@utility rhythm-section {
+  padding-top: 3rem;
+  padding-bottom: 1rem;
+
+  @media (min-width: 768px) {
+    padding-top: 6rem;
+    padding-bottom: 2rem;
+  }
+}
+
+@utility rhythm-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@utility rhythm-stack-small {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@utility rhythm-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Component Utilities (DRY enforcement across Astro & Client-side Templates) */
+@utility card-article {
+  @apply border-theme-border relative flex cursor-pointer flex-col gap-4 border-t-[0.0625rem] pt-10 transition-all duration-300;
+}
+
+@utility pill-tag {
+  @apply type-ui text-theme-text bg-theme-border/25 border-theme-border/25 hover:bg-theme-text hover:text-theme-bg hover:border-theme-text block rounded border px-3 py-1 transition-all duration-300 ease-in-out;
+}
+
+@utility badge-date {
+  @apply type-ui text-theme-muted block shrink-0 whitespace-nowrap;
+}

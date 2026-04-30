@@ -1,0 +1,11 @@
+{
+  "useMarkdownLinks": true,
+  "showUnsupportedFiles": true,
+  "attachmentFolderPath": "assets/",
+  "newLinkFormat": "absolute",
+  "defaultViewMode": "source",
+  "userIgnoreFilters": null,
+  "openBehavior": "daily",
+  "showInlineTitle": true,
+  "alwaysUpdateLinks": true
+}

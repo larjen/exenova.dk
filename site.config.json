@@ -1,0 +1,15 @@
+{
+  "deployRepo": "https://example.com/example-repo.git",
+  "deployBranch": "main",
+  "vaultPath": "./ObsidianVault",
+  "baseUrl": "example.com",
+  "showMenubar": false,
+  "createSitemap": true,
+  "includeNotes": false,
+  "authorName": "Lars Jensen",
+  "email": "lars.jensen@example.com",
+  "githubUrl": "https://github.com/larjen",
+  "linkedinUrl": "https://www.linkedin.com/in/larsjensendenmark/",
+  "defaultTitle": "Lars Jensen | AI, Leadership & Business Value",
+  "defaultDescription": "Bridging the gap between technology and real business value"
+}

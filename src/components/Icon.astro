@@ -1,0 +1,47 @@
+---
+/**
+ * @file Icon.astro
+ * @description Dynamic icon renderer. Fetches raw SVG strings automatically based on the name prop.
+ * Automatically injects `data-pagefind-ignore="all"` and `aria-hidden="true"` into every SVG tag
+ * to prevent icon path data (e.g., 'aaaaaa' in SVG paths) from polluting the Pagefind search index.
+ * @property {string} name - The filename of the icon in src/assets/icons (without the .svg extension).
+ * @property {string} [class='w-5 h-5'] - Optional Tailwind CSS classes for sizing.
+ * @property {boolean} [preserveColor=false] - When true, retains the original fill/stroke colors.
+ */
+
+interface Props {
+  name: string;
+  class?: string;
+  preserveColor?: boolean;
+}
+
+const { name, class: className = 'w-5 h-5', preserveColor = false } = Astro.props;
+
+const svgFiles = import.meta.glob('../assets/icons/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+const svgKey = `../assets/icons/${name}.svg`;
+const rawSvg = svgFiles[svgKey] as string;
+
+if (!rawSvg) {
+  throw new Error(`Icon "${name}" not found in src/assets/icons/`);
+}
+
+let processedSvg = rawSvg.replace(/\s*width="[^"]*"/, '').replace(/\s*height="[^"]*"/, '');
+
+if (!preserveColor) {
+  processedSvg = processedSvg
+    .replace(/\s*fill="(?!none)([^"]*)"/g, 'fill="currentColor"')
+    .replace(/\s*stroke="(?!none)([^"]*)"/g, 'stroke="currentColor"');
+}
+
+processedSvg = processedSvg.replace(
+  /<svg([^>]*)>/,
+  `<svg$1 class="${className}" aria-hidden="true" data-pagefind-ignore="all">`
+);
+---
+
+{/* eslint-disable-next-line astro/no-set-html-directive */}
+<Fragment set:html={processedSvg} />
